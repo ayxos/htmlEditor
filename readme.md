@@ -1,8 +1,8 @@
 # Live Demo
 http://ayxos.com/htmlEditor/
 
-# Ghost Markdown Editor
-
+# Html Editor
+For HTML translators.
 Pulled this from Ghost ( http://ghost.org/features ). Its a responsive jquery markdown editor with instant preview.
 
 ## Screenshot
@@ -14,6 +14,8 @@ Pulled this from Ghost ( http://ghost.org/features ). Its a responsive jquery ma
 - Translate text using 5 different spell checkers (Spanish, Deutch, English, French and Portuguese)
 - Save your changes
 - Create your own notes
+- Count your words
+- Control your time
 
 This app use multiple github projects:
 - Based on Ghost-Markdown-Editor (https://github.com/timsayshey/Ghost-Markdown-Editor)

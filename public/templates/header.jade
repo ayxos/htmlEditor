@@ -1,0 +1,43 @@
+include _alerts.jade
+
+ul.nav.navbar-nav
+	//- button.btn.btn-link#stats Stats
+	a.btn.btn-link(ng-href='{{domain}}/')  Home
+	a.btn.btn-link(ng-href='{{domain}}/#/about')  About us
+	a.btn.btn-link(ng-href='{{domain}}/#/worknotes', ng-if='user.fullName')  WorkNotes
+	a.btn.btn-link#login(ng-href='{{domain}}/login', ng-if='!user.fullName')  Login
+	.dropdown(ng-if='user.fullName', style='display:inline-block')
+		button#menu1.btn.btn-link.dropdown-toggle(type="button", data-toggle="dropdown") {{user.fullName}}
+		span.caret
+		ul.dropdown-menu(role="menu", aria-labelledby="menu1")
+			li(role="presentation", ng-repeat='article in articles', ng-if='articles.length')
+				a(role="menuitem", tabindex="-1", ng-click='load(article)', style='display:inline-block') {{article.title}}
+				i(class="icon-remove", ng-click='delete(article._id)')
+			li(role="presentation", ng-if='!articles.length')
+				a(tabindex="-1") No text yet
+			li(role="presentation" class="divider")
+			li(role="presentation")
+				a(ng-href='{{domain}}/logout', tabindex="-1") Logout
+
+ul.nav.navbar-nav.navbar-right
+	#stopWatch.inline(style='margin: 0 4%')
+		#time.pointable 00:00:00
+		#divStart.inline
+			a#btnStart(style="font-weight:bold;", data-do="start")
+				i(class="icon-play")
+		#divControls.row.inline(style='display:none;margin: 0 2px')
+			a#btnPause(style='margin: 0 2px')
+				i.icon-pause
+			a#btnStop(style='margin: 0 2px')
+				i.icon-repeat
+	select#sel1.form-control(style='width:100px;display:inline-block')
+		option(value='en') To English
+		option(value='es') To Spanish
+		option(value='fr') To French
+		option(value='de') To German
+		option(value='pt') To Portuguese
+	button.btn.btn-primary(type="button", data-toggle="modal", data-target="#myModal", ng-if='user.fullName', ) Save
+
+	a(style='margin: 0 20px', ng-click='toggleNav()')
+		i.icon-upload
+include _saveModal.jade

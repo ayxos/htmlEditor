@@ -1,0 +1,26 @@
+
+<!-- Modal-->
+<div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
+  <div role="document" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&#215;</span></button>
+        <h4 id="myModalLabel" class="modal-title">Saving post</h4>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom:2%" class="input-group"><span id="basic-addon1" class="input-group-addon">Create new</span>
+          <input type="text" placeholder="New post" aria-describedby="basic-addon1" ng-model="title" class="form-control"/>
+        </div>
+        <ul class="list-group">
+          <li role="presentation" ng-repeat="article in articles" ng-if="articles.length" class="list-group-item"><a role="menuitem" tabindex="-1" ng-click="load(article)" style="display:inline-block">{{article.title}}</a>
+            <div style="float:right" class="options"><i ng-click="update(article._id)" class="icon-refresh"></i><i ng-click="delete(article._id)" class="icon-remove"></i></div>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="close-modal btn btn-default">Close</button>
+        <button ng-click="save()" data-dismiss="modal" class="btn btn-success"> Save</button>
+      </div>
+    </div>
+  </div>
+</div>

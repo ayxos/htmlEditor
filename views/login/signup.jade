@@ -1,0 +1,31 @@
+extends layout
+
+block content
+	.container
+		.col-sm-6.col-sm-offset-3
+			h1
+				span.fa.fa-sign-in
+				| Signup
+
+			if message.length > 0
+				.alert.alert-danger #{message}
+			// LOGIN FORM
+			form(action='#{domain}/signup', method='post')
+				.form-group
+					label Name
+					input.form-control(type='text', name='name')
+				.form-group
+					label Email
+					input.form-control(type='text', name='email')
+				.form-group
+					label Password
+					input.form-control(type='password', name='password')
+				button.btn.btn-warning.btn-lg(type='submit') Signup
+			hr
+			p
+				| Already have an account?
+				a(href='#{domain}/login') Login
+			p
+				| Or go
+				a(href='#{domain}/') home
+				| .

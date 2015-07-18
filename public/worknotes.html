@@ -1,0 +1,57 @@
+
+<h2 ng-if="!article" style="text-align:center">Please select an existing post before continue....</h2><a ng-mousedown="csv.generate()" ng-href="{{ csv.link() }}" download="test.csv" ng-if="article" class="btn btn-primary">Export to CSV</a>
+<button ng-click="row.$edit = false; newRow()" style="margin:3%" ng-if="article" class="btn btn-primary btn-xs">New Row</button>
+<table ng-table="tableParams" ng-if="article" export-csv="csv" class="table workNotes">
+  <thead>
+    <tr>
+      <th class="sortable">Date</th>
+      <th class="sortable">Hours</th>
+      <th class="sortable">Work</th>
+      <th class="sortable">Mistakes</th>
+      <th class="sortable">Suggestions</th>
+      <th class="sortable">Clarifications</th>
+      <th class="sortable">Comments</th>
+      <th class="sortable">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="row in $data">
+      <td data-title="'Date'"><span ng-if="!row.$edit" ng-bind="row.date"></span>
+        <div ng-if="row.$edit">
+          <input type="date" ng-model="row.date" class="form-control"/>
+        </div>
+      </td>
+      <td data-title="'Hours'"><span ng-if="!row.$edit" ng-bind="row.hours"></span>
+        <div ng-if="row.$edit">
+          <input type="number" ng-model="row.hours" class="form-control"/>
+        </div>
+      </td>
+      <td data-title="'Work'"><span ng-if="!row.$edit" ng-bind="row.work"></span>
+        <div ng-if="row.$edit">
+          <textarea type="text" ng-model="row.work" class="form-control"></textarea>
+        </div>
+      </td>
+      <td data-title="'Mistakes'"><span ng-if="!row.$edit" ng-bind="row.mistakes"></span>
+        <div ng-if="row.$edit">
+          <textarea type="text" ng-model="row.mistakes" class="form-control"></textarea>
+        </div>
+      </td>
+      <td data-title="'Suggestions'"><span ng-if="!row.$edit" ng-bind="row.suggestions"></span>
+        <div ng-if="row.$edit">
+          <textarea type="text" ng-model="row.suggestions" class="form-control"></textarea>
+        </div>
+      </td>
+      <td data-title="'Clarifications'"><span ng-if="!row.$edit" ng-bind="row.clarifications"></span>
+        <div ng-if="row.$edit">
+          <textarea type="text" ng-model="row.clarifications" class="form-control"></textarea>
+        </div>
+      </td>
+      <td data-title="'Comments'"><span ng-if="!row.$edit" ng-bind="row.comments"></span>
+        <div ng-if="row.$edit">
+          <textarea type="text" ng-model="row.comments" class="form-control"></textarea>
+        </div>
+      </td>
+      <td data-title="'Actions'" width="150px"><a ng-if="!row.$edit" href="" ng-click="row.$edit = true" class="btn btn-default btn-xs">Edit</a><a ng-if="!row.$edit" href="" ng-click="deleteRow($index)" class="btn btn-default btn-xs">Delete</a><a ng-if="row.$edit" href="" ng-click="row.$edit = false; saveTable($index)" class="btn btn-primary btn-xs">Save</a></td>
+    </tr>
+  </tbody>
+</table>

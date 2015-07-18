@@ -1,0 +1,18 @@
+// Modal
+#checkModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel")
+  .modal-dialog(role="document")
+    .modal-content
+      .modal-header
+        button.close(type="button", data-dismiss="modal", aria-label="Close")
+          span(aria-hidden="true") &#215;
+        h4#myModalLabel.modal-title SpellChecker
+      .modal-body
+        ul
+          li(ng-repeat='error in spellChecker')
+            p(ng-bind='error.string')
+            .box
+              ul
+                li(ng-repeat='suggestion in error.suggestions')
+                  p(ng-bind='suggestion')
+      .modal-footer
+        button.btn.btn-default(type="button", data-dismiss="modal") Close

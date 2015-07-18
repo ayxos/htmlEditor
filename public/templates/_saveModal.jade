@@ -1,0 +1,21 @@
+// Modal
+#myModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel")
+	.modal-dialog(role="document")
+		.modal-content
+			.modal-header
+				button.close(type="button", data-dismiss="modal", aria-label="Close")
+					span(aria-hidden="true") &#215;
+				h4#myModalLabel.modal-title Saving post
+			.modal-body
+				.input-group(style='margin-bottom:2%')
+					span.input-group-addon(id="basic-addon1") Create new
+					input(type="text" class="form-control" placeholder="New post" aria-describedby="basic-addon1" ng-model='title')
+				ul.list-group
+					li.list-group-item(role="presentation", ng-repeat='article in articles', ng-if='articles.length')
+						a(role="menuitem", tabindex="-1", ng-click='load(article)', style='display:inline-block') {{article.title}}
+						.options(style='float:right')
+							i(class="icon-refresh", ng-click='update(article._id)')
+							i(class="icon-remove", ng-click='delete(article._id)')
+			.modal-footer
+				button.close-modal.btn.btn-default(type="button", data-dismiss="modal") Close
+				button.btn.btn-success(ng-click='save()', data-dismiss="modal")  Save

@@ -1,0 +1,4 @@
+.alert.alert-dismissible(ng-class='alert.class' role="alert", style='display:none;width: 200px;margin:auto auto')
+	button(type="button" class="close" onclick="$('.alert').hide()")
+		span(aria-hidden="true") &times;
+	p(ng-bind='alert.message')

@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  .container
+    .col-sm-6.col-sm-offset-3
+      h1
+        span.fa.fa-user
+        | Add Local Account
+
+      if message.length > 0
+        .alert.alert-danger #{message}
+
+      // LOGIN FORM
+      form(action='#{domain}/connect/local', method='post')
+        .form-group
+          label Name
+          input.form-control(type='text', name='name')
+        .form-group
+          label Email
+          input.form-control(type='text', name='email')
+        .form-group
+          label Password
+          input.form-control(type='password', name='password')
+        button.btn.btn-warning.btn-lg(type='submit') Add Local
+      hr
+      p
+        a(href='/profile') Go back to profile

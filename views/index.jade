@@ -1,0 +1,47 @@
+doctype html
+html(lang="en", ng-app='angularRoutingApp')
+    head
+        meta(charset="UTF-8")
+        title Work With HTML
+        // js
+        script(src="js/external/jquery-1.10.1.min.js")
+        script(src="http://code.jquery.com/ui/1.10.4/jquery-ui.js")
+        script(src="js/external/ghostdown.js")
+        // css
+        link(href="css/ghostdown.css", media="all", rel="stylesheet")
+        link(href="css/font-awesome.css", media="all", rel="stylesheet")
+        link(href="css/chrono.css", media="all", rel="stylesheet")
+        link(href="css/ng-table.css", media="all", rel="stylesheet")
+        link(href="css/custom.css", media="all", rel="stylesheet")
+
+        // Latest compiled and minified CSS
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+        // Optional theme
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css")
+        // Latest compiled and minified JavaScript
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
+        script(src='https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22feeds%22%2C%22version%22%3A%221.0%22%2C%22nocss%22%3Atrue%7D%5D%7D')
+        script(src='http://momentjs.com/downloads/moment.js')
+
+    body
+
+        a#toggleDown.btn.btn-link(style='margin: 0 20px; display: none', ng-click='toggleNav()') Menu
+
+        #navbar(ui-view='header')
+
+        .features(ui-view='content')
+
+        script.
+          var domainUrl="#{domain}";
+
+        script(src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.7/angular.min.js')
+        script(src='//angular-ui.github.io/ui-router/release/angular-ui-router.js')
+        script(src="https://code.angularjs.org/1.4.1/angular-resource.min.js")
+        script(src='http://siddii.github.io/angular-feeds/app/angular-feeds/angular-feeds.js')
+
+        script(src="js/external/ng-table.min.js")
+
+        script(src="js/external/jquery.ghostdown.js")
+        script(src="js/external/jquery.fittext.js")
+
+        script(src='js/main.js')

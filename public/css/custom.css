@@ -1,0 +1,42 @@
+header .left {
+	float: left;
+}
+#navbar {
+	background: rgb(250, 250, 250);
+	width: 80%;
+	margin: auto auto;
+	padding: 10px;
+}
+.revenue {
+	display: inline-table;
+}
+.controls {
+	margin-top: 2%;
+	display: inline-block;
+	width: 100%;
+}
+.margin-sm {
+	margin: 1%;
+}
+.table.workNotes {
+	width: 94%;
+	margin: auto auto;
+}
+#time {
+	font-weight: bold;
+	display: inline-block;
+	margin: auto auto;
+	font-size: initial !important;
+}
+.inline {
+	display: inline-block;
+}
+.inline.table {
+	display: inline-table;
+}
+.navbar-right {
+	width: 38%;
+}
+#navbar {
+	height: 56px;
+}

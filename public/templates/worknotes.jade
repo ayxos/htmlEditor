@@ -1,0 +1,48 @@
+h2(ng-if='!article', style='text-align:center') Please select an existing post before continue....
+//- a(class="btn btn-primary" ng-mousedown="csv.generate()" ng-href="{{ csv.link() }}" download="test.csv", ng-if='article') Export to CSV
+button.btn.btn-primary.btn-xs(ng-click="row.$edit = false; newRow()", style='margin:3%', ng-if='article') New Row
+table.table.workNotes(ng-table="tableParams", ng-if='article', export-csv="csv")
+  thead
+    tr
+      th.sortable Date
+      th.sortable Hours
+      th.sortable Work
+      th.sortable Mistakes
+      th.sortable Suggestions
+      th.sortable Clarifications
+      th.sortable Comments
+      th.sortable Actions
+  tbody
+    tr(ng-repeat="row in $data")
+      td(data-title="'Date'")
+        span(ng-if="!row.$edit", ng-bind='row.date')
+        div(ng-if="row.$edit")
+          input.form-control(type="date", ng-model="row.date")
+      td(data-title="'Hours'")
+        span(ng-if="!row.$edit", ng-bind='row.hours')
+        div(ng-if="row.$edit")
+          input.form-control(type="number", ng-model="row.hours")
+      td(data-title="'Work'")
+        span(ng-if="!row.$edit", ng-bind='row.work')
+        div(ng-if="row.$edit")
+          textarea.form-control(type="text", ng-model="row.work")
+      td(data-title="'Mistakes'")
+        span(ng-if="!row.$edit", ng-bind='row.mistakes')
+        div(ng-if="row.$edit")
+          textarea.form-control(type="text", ng-model="row.mistakes")
+      td(data-title="'Suggestions'")
+        span(ng-if="!row.$edit", ng-bind='row.suggestions')
+        div(ng-if="row.$edit")
+          textarea.form-control(type="text", ng-model="row.suggestions")
+      td(data-title="'Clarifications'")
+        span(ng-if="!row.$edit", ng-bind='row.clarifications')
+        div(ng-if="row.$edit")
+          textarea.form-control(type="text", ng-model="row.clarifications")
+      td(data-title="'Comments'")
+        span(ng-if="!row.$edit", ng-bind='row.comments')
+        div(ng-if="row.$edit")
+          textarea.form-control(type="text", ng-model="row.comments")
+      td(data-title="'Actions'", width="150px")
+        a.btn.btn-default.btn-xs(ng-if="!row.$edit", href="", ng-click="row.$edit = true") Edit
+        a.btn.btn-default.btn-xs(ng-if="!row.$edit", href="", ng-click="deleteRow($index)") Delete
+        a.btn.btn-primary.btn-xs(ng-if="row.$edit", href="", ng-click="row.$edit = false; saveTable($index)") Save

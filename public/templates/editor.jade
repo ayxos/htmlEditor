@@ -1,0 +1,45 @@
+section.editor
+    .outer
+      .editorwrap
+        section.original-markdown.active
+          header.floatingheader
+            | Original&nbsp;
+            span.original-word-count(ng-if='wordOriginal', style='float:right')
+              | {{wordOriginal}}
+              | words
+          section.original-markdown-content.content
+            textarea#originalText(ng-model="textAreaModel")
+        section.entry-markdown
+          header.floatingheader(style='white-space:nowrap')
+            | Markdown
+            .btn.btn-link(ng-click='check()', data-toggle="modal", data-target="#checkModal",) spellCheck
+            .btn.btn-link(ng-click='download()', ng-if='!showDownloadLink && user.fullName') code
+            a(href="test.txt" download="htmlCode.txt", ng-if='showDownloadLink && user.fullName', ng-click='turnoff()') Download
+          section.entry-markdown-content.content
+            textarea [Paste here bunches of the original text or the whole text itself...]
+        section.entry-preview.active
+          header.floatingheader
+            | Preview&nbsp;
+            span.entry-word-count 0&nbsp;words
+            a.btn.btn-link(data-toggle="modal", data-target="#cheatsheet") &#60;?&#62;
+          section.entry-preview-content.content
+            .rendered-markdown
+
+section.controls.col-md-2.col-md-offset-9
+    // calc revenue
+    .margin-sm
+      button#toggleRevenue.btn.btn-link(style='margin:1%') Show/hide Revenue
+      .revenue(style='display:none;margin:1%')
+        .inline.table
+          span.input-group-addon $/word
+          input#getValue.form-control(type="number", ng-model='price', aria-label="Amount (to the nearest currency)")
+          span#finalValue.input-group-addon(ng-bind='finalValue')
+        .inline.table
+          span.input-group-addon Word/Hr
+          input#getValue.form-control(type="number", ng-model='words', aria-label="Amount (to the nearest currency)")
+          span#finalValue.input-group-addon(ng-bind='finalHours')
+
+include _errorModal.jade
+include _cheatsheet.jade
+
+script(src="js/external/chrono.js")

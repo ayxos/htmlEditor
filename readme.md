@@ -2,8 +2,7 @@
 http://ayxos.com/htmlEditor/
 
 # Html Editor
-For HTML translators.
-Pulled this from Ghost ( http://ghost.org/features ). Its a responsive jquery markdown editor with instant preview.
+For HTML translators. Its a responsive jquery-angular-node editor tool with instant preview by translators for translators
 
 ## Screenshot
 

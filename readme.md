@@ -7,9 +7,13 @@ Pulled this from Ghost ( http://ghost.org/features ). Its a responsive jquery ma
 
 ## Screenshot
 
-![Screenshot](https://raw.github.com/timsayshey/Ghost-Markdown-Editor/master/screenshot.png)
+![Screenshot](http://i61.tinypic.com/2z6e8v6.png)
 
 ## Features
+- Edit a HTML file in real-time
+- Translate text using 5 different spell checkers (Spanish, Deutch, English, French and Portuguese)
+- Save your changes
+- Create your own notes
 
 This app use multiple github projects:
 - Based on Ghost-Markdown-Editor (https://github.com/timsayshey/Ghost-Markdown-Editor)

@@ -46,7 +46,7 @@ angular.module('controllers.header', [
 		var auxObj = {
 			title: $scope.title,
 			content: $('#originalText').val(),
-			markdown: $('.CodeMirror-code').text()
+			markdown: window.html
 		};
 		var article = new ArticlesService(auxObj);
 		article.$save(function(arg) {
@@ -64,7 +64,7 @@ angular.module('controllers.header', [
 		var a = articleID;
 		var auxObj = {
 			content: $('#originalText').val(),
-			markdown: $('.CodeMirror-code').text()
+			markdown: window.html
 		};
 		ArticlesService.update({id: a}, auxObj, function(arg) {
 			$rootScope.alert = {

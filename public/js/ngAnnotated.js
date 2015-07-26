@@ -112,6 +112,8 @@ angular.module('controllers.editor', [
 
 	$scope.cheatsheet = CHEATSHEET;
 
+	var $htmlText = $('.CodeMirror-code').text();
+
     var a = $(".editor").ghostDown({
         scope: '.entry-markdown',
         original: '.original-markdown',
@@ -120,8 +122,11 @@ angular.module('controllers.editor', [
     });
 
     $scope.download = function(){
-    	console.log(window.html);
-		$http.post(DOMAIN_URL + '/getFile', {msg:window.html}).
+    	var res = window.html.replace(/<\/\htmlEditor>/g,"");
+    	var result = res.replace(/<htmlEditor>/g,"");
+    	console.log(result);
+
+		$http.post(DOMAIN_URL + '/getFile', {msg: result}).
 		  success(function(data, status, headers, config) {
 		    // this callback will be called asynchronously
 		    // when the response is available
@@ -235,7 +240,7 @@ angular.module('controllers.header', [
 				console.log('wee');
 				break;
 			default:
-				console.log('mark',content.markdown);
+				console.log('mark', content.markdown);
 				window.editor.setValue(content.markdown);
 		}
 	}

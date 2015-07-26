@@ -44,3 +44,17 @@ header .left {
 	height: 200px;
 	width: 300px;
 }
+.rendered-markdown strong {
+	display: block;
+}
+htmlEditor {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+	margin: 0 0 10px;
+}
+.note {
+	margin: 100px;
+}

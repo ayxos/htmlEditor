@@ -23,8 +23,11 @@ angular.module('controllers.editor', [
     });
 
     $scope.download = function(){
-    	console.log(window.html);
-		$http.post(DOMAIN_URL + '/getFile', {msg:$htmlText}).
+    	var res = window.html.replace(/<\/\htmlEditor>/g,"");
+    	var result = res.replace(/<htmlEditor>/g,"");
+    	console.log(result);
+
+		$http.post(DOMAIN_URL + '/getFile', {msg: result}).
 		  success(function(data, status, headers, config) {
 		    // this callback will be called asynchronously
 		    // when the response is available
@@ -49,7 +52,7 @@ angular.module('controllers.editor', [
 	};
 
 	$scope.check = function(){
-		$http.post(DOMAIN_URL + '/check', {lang: $('#sel1').val(), html: $htmlText})
+		$http.post(DOMAIN_URL + '/check', {lang: $('#sel1').val(), html: window.html})
 		  .success(function(data, status, headers, config) {
 		    // this callback will be called asynchronously
 		    // when the response is available

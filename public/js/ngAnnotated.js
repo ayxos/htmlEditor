@@ -294,7 +294,8 @@ angular.module('controllers.header', [
 angular.module('controllers.worknotes', [
 	'config',
 	'ngTable',
-	'services.notes'
+	'services.notes',
+	'angularMoment'
 ])
 .controller('WorknotesController', ["$scope", "$rootScope", "ngTableParams", "NotesService", function($scope, $rootScope, ngTableParams, NotesService) {
 	$scope.message = 'Who we are';
@@ -325,7 +326,8 @@ angular.module('controllers.worknotes', [
 	    	comments: 'empty'
     	};
     	NotesService.save(objectEmpty, function(arg){
-    		objectEmpty.id = arg.object._id;
+    		objectEmpty._id = arg.object._id;
+    		console.log('id', arg.object._id);
     		$scope.tableParams.data.push(objectEmpty);
     	});
     }
@@ -333,7 +335,7 @@ angular.module('controllers.worknotes', [
     $scope.saveTable = function(row) {
     	var objectToSend = $scope.tableParams.data[row];
     	objectToSend.articleId = $rootScope.article._id;
-    	NotesService.update({id: objectToSend.id}, objectToSend, function(arg){
+    	NotesService.update(objectToSend, function(arg){
     		$scope.tableParams.data[row] = arg.object;
     	});
     }
@@ -454,7 +456,7 @@ angular.module('services.notes', [
 	'ngResource'
 ])
 .factory('NotesService', ["$resource", "DOMAIN_URL", function($resource, DOMAIN_URL) {
-  var notesSrvc = $resource(DOMAIN_URL + 'notes/:id/', null, {
+  var notesSrvc = $resource(DOMAIN_URL + 'notes/:id/', {id:'@_id'}, {
   	'update':  {method:'PUT'}
   });
   return notesSrvc;

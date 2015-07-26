@@ -6,7 +6,8 @@
 angular.module('controllers.worknotes', [
 	'config',
 	'ngTable',
-	'services.notes'
+	'services.notes',
+	'angularMoment'
 ])
 .controller('WorknotesController', function($scope, $rootScope, ngTableParams, NotesService) {
 	$scope.message = 'Who we are';
@@ -37,7 +38,8 @@ angular.module('controllers.worknotes', [
 	    	comments: 'empty'
     	};
     	NotesService.save(objectEmpty, function(arg){
-    		objectEmpty.id = arg.object._id;
+    		objectEmpty._id = arg.object._id;
+    		console.log('id', arg.object._id);
     		$scope.tableParams.data.push(objectEmpty);
     	});
     }
@@ -45,7 +47,7 @@ angular.module('controllers.worknotes', [
     $scope.saveTable = function(row) {
     	var objectToSend = $scope.tableParams.data[row];
     	objectToSend.articleId = $rootScope.article._id;
-    	NotesService.update({id: objectToSend.id}, objectToSend, function(arg){
+    	NotesService.update(objectToSend, function(arg){
     		$scope.tableParams.data[row] = arg.object;
     	});
     }

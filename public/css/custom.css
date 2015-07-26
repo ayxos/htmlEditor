@@ -40,3 +40,7 @@ header .left {
 #navbar {
 	height: 56px;
 }
+.form-control.expanded:focus {
+	height: 200px;
+	width: 300px;
+}

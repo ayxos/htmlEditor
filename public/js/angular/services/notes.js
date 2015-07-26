@@ -8,7 +8,7 @@ angular.module('services.notes', [
 	'ngResource'
 ])
 .factory('NotesService', function($resource, DOMAIN_URL) {
-  var notesSrvc = $resource(DOMAIN_URL + 'notes/:id/', null, {
+  var notesSrvc = $resource(DOMAIN_URL + 'notes/:id/', {id:'@_id'}, {
   	'update':  {method:'PUT'}
   });
   return notesSrvc;

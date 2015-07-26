@@ -16,7 +16,7 @@
   </thead>
   <tbody>
     <tr ng-repeat="row in $data">
-      <td data-title="'Date'"><span ng-if="!row.$edit" ng-bind="row.date"></span>
+      <td data-title="'Date'"><span ng-if="!row.$edit" ng-bind="row.date | amDateFormat: &quot;dd, MM YYYY, hh:mm&quot;"></span>
         <div ng-if="row.$edit">
           <input type="date" ng-model="row.date" class="form-control"/>
         </div>
@@ -28,27 +28,27 @@
       </td>
       <td data-title="'Work'"><span ng-if="!row.$edit" ng-bind="row.work"></span>
         <div ng-if="row.$edit">
-          <textarea type="text" ng-model="row.work" class="form-control"></textarea>
+          <textarea type="text" contenteditable="contenteditable" ng-model="row.work" class="form-control expanded"></textarea>
         </div>
       </td>
       <td data-title="'Mistakes'"><span ng-if="!row.$edit" ng-bind="row.mistakes"></span>
         <div ng-if="row.$edit">
-          <textarea type="text" ng-model="row.mistakes" class="form-control"></textarea>
+          <textarea type="text" contenteditable="contenteditable" ng-model="row.mistakes" class="form-control expanded"></textarea>
         </div>
       </td>
       <td data-title="'Suggestions'"><span ng-if="!row.$edit" ng-bind="row.suggestions"></span>
         <div ng-if="row.$edit">
-          <textarea type="text" ng-model="row.suggestions" class="form-control"></textarea>
+          <textarea type="text" contenteditable="contenteditable" ng-model="row.suggestions" class="form-control expanded"></textarea>
         </div>
       </td>
       <td data-title="'Clarifications'"><span ng-if="!row.$edit" ng-bind="row.clarifications"></span>
         <div ng-if="row.$edit">
-          <textarea type="text" ng-model="row.clarifications" class="form-control"></textarea>
+          <textarea type="text" contenteditable="contenteditable" ng-model="row.clarifications" class="form-control expanded"></textarea>
         </div>
       </td>
       <td data-title="'Comments'"><span ng-if="!row.$edit" ng-bind="row.comments"></span>
         <div ng-if="row.$edit">
-          <textarea type="text" ng-model="row.comments" class="form-control"></textarea>
+          <textarea type="text" contenteditable="contenteditable" ng-model="row.comments" class="form-control expanded"></textarea>
         </div>
       </td>
       <td data-title="'Actions'" width="150px"><a ng-if="!row.$edit" href="" ng-click="row.$edit = true" class="btn btn-default btn-xs">Edit</a><a ng-if="!row.$edit" href="" ng-click="deleteRow($index)" class="btn btn-default btn-xs">Delete</a><a ng-if="row.$edit" href="" ng-click="row.$edit = false; saveTable($index)" class="btn btn-primary btn-xs">Save</a></td>

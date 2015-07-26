@@ -13,6 +13,8 @@ angular.module('controllers.editor', [
 
 	$scope.cheatsheet = CHEATSHEET;
 
+	var $htmlText = $('.CodeMirror-code').text();
+
     var a = $(".editor").ghostDown({
         scope: '.entry-markdown',
         original: '.original-markdown',
@@ -22,7 +24,7 @@ angular.module('controllers.editor', [
 
     $scope.download = function(){
     	console.log(window.html);
-		$http.post(DOMAIN_URL + '/getFile', {msg:window.html}).
+		$http.post(DOMAIN_URL + '/getFile', {msg:$htmlText}).
 		  success(function(data, status, headers, config) {
 		    // this callback will be called asynchronously
 		    // when the response is available
@@ -47,7 +49,7 @@ angular.module('controllers.editor', [
 	};
 
 	$scope.check = function(){
-		$http.post(DOMAIN_URL + '/check', {lang: $('#sel1').val(), html: window.html})
+		$http.post(DOMAIN_URL + '/check', {lang: $('#sel1').val(), html: $htmlText})
 		  .success(function(data, status, headers, config) {
 		    // this callback will be called asynchronously
 		    // when the response is available

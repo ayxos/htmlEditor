@@ -7,7 +7,7 @@
   <div ng-if="user.fullName" style="display:inline-block" class="dropdown">
     <button id="menu1" type="button" data-toggle="dropdown" class="btn btn-link dropdown-toggle">{{user.fullName}}</button><span class="caret"></span>
     <ul role="menu" aria-labelledby="menu1" class="dropdown-menu">
-      <li role="presentation" ng-repeat="article in articles" ng-if="articles.length"><a role="menuitem" tabindex="-1" ng-click="load(article)" style="display:inline-block">{{article.title}}</a><i ng-click="delete(article._id)" class="icon-remove"></i></li>
+      <li role="presentation" ng-repeat="article in articles" ng-if="articles.length"><a role="menuitem" tabindex="-1" ng-click="load($index)" style="display:inline-block">{{article.title}}</a><i ng-click="delete(article._id)" class="icon-remove"></i></li>
       <li role="presentation" ng-if="!articles.length"><a tabindex="-1">No text yet</a></li>
       <li role="presentation" class="divider"></li>
       <li role="presentation"><a ng-href="{{domain}}/logout" tabindex="-1">Logout</a></li>

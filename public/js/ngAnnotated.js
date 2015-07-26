@@ -213,10 +213,18 @@ angular.module('controllers.header', [
 		class: 'alert-success',
 		message: 'Done'
 	};
-	if($rootScope.user) $scope.articles = ArticlesService.get();
+	$rootScope.articleNumber = 0;
+	if($rootScope.user) ArticlesService.get(function(arg){
+		$scope.articles = arg;
+
+		//load first by default if exist
+		if($scope.articles.length) $scope.load($scope.articleNumber);
+	});
 
 	// OPS
-	$scope.load = function(content) {
+	$scope.load = function(index) {
+		var content = $scope.articles[index];
+		$rootScope.articleNumber = index;
 		console.log('loading content...', content);
 		$('#originalText').val(content.content);
 		// insert into editor mode
@@ -227,6 +235,7 @@ angular.module('controllers.header', [
 				console.log('wee');
 				break;
 			default:
+				console.log('mark',content.markdown);
 				window.editor.setValue(content.markdown);
 		}
 	}

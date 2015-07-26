@@ -11,7 +11,7 @@ ul.nav.navbar-nav
 		span.caret
 		ul.dropdown-menu(role="menu", aria-labelledby="menu1")
 			li(role="presentation", ng-repeat='article in articles', ng-if='articles.length')
-				a(role="menuitem", tabindex="-1", ng-click='load(article)', style='display:inline-block') {{article.title}}
+				a(role="menuitem", tabindex="-1", ng-click='load($index)', style='display:inline-block') {{article.title}}
 				i(class="icon-remove", ng-click='delete(article._id)')
 			li(role="presentation", ng-if='!articles.length')
 				a(tabindex="-1") No text yet

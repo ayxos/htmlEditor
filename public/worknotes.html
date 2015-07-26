@@ -1,5 +1,5 @@
 
-<h2 ng-if="!article" style="text-align:center">Please select an existing post before continue....</h2><a ng-mousedown="csv.generate()" ng-href="{{ csv.link() }}" download="test.csv" ng-if="article" class="btn btn-primary">Export to CSV</a>
+<h2 ng-if="!article" style="text-align:center">Please select an existing post before continue....</h2>
 <button ng-click="row.$edit = false; newRow()" style="margin:3%" ng-if="article" class="btn btn-primary btn-xs">New Row</button>
 <table ng-table="tableParams" ng-if="article" export-csv="csv" class="table workNotes">
   <thead>

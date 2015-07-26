@@ -1,58 +1,8 @@
-// Creación del módulo
-var angularRoutingApp = angular.module('angularRoutingApp', [
-	'controllers',
-	'ui.router'
-])
-// Configuración de las rutas
-angularRoutingApp.config(function($stateProvider) {
-	// Now set up the states
-	$stateProvider
-		.state('index', {
-			url: "",
-			views: {
-				"header": {
-					controller: 'HeaderController',
-					templateUrl: 'header.html'
-				},
-				"content": {
-					controller: 'EditorController',
-					templateUrl: 'editor.html'
-				}
-			}
-		})
-		.state('worknotes', {
-			url: "/worknotes",
-			views: {
-				"header": {
-					controller: 'HeaderController',
-					templateUrl: 'header.html'
-				},
-				"content": {
-					controller: 'WorknotesController',
-					templateUrl: 'worknotes.html'
-				}
-			}
-		})
-		.state('about', {
-			url: "/about",
-			views: {
-				"header": {
-					controller: 'HeaderController',
-					templateUrl: 'header.html'
-				},
-				"content": {
-					controller: 'AboutController',
-					templateUrl: 'about.html'
-				}
-			}
-		})
-});
-
-var angularRoutingApp = angular.module('controllers', [
-	'ngResource',
-	'feeds',
-	'ngTable'
-])
+/**
+ * Configuration module for the app
+ * @module configuration
+ */
+angular.module('config', [])
 
 .constant('CHEATSHEET', [
 	{code:'<html></html>', desc: 'Creates an HTML document'},
@@ -135,35 +85,28 @@ var angularRoutingApp = angular.module('controllers', [
 	{code:'<button type="submit">Submit</button>', desc: 'Creates an actual button that is clicked'},
 	{code:'<input type="image" border=0 name="NAME" src="name.gif">', desc: 'Creates a Submit button using an image'},
 	{code:'<input type="reset">', desc: 'Creates a Reset button'}
+]);
+/**
+ * Controller module for the about
+ * @module controllers/about
+ */
+angular.module('controllers.about', [
+	'config'
 ])
+.controller('AboutController', ["$scope", "$http", "DOMAIN_URL", function($scope, $http, DOMAIN_URL) {
+	$scope.domain = DOMAIN_URL;
+	$scope.message = 'Who we are';
+}]);
+/**
+ * Controller module for the content
+ * @module controllers/content
+ */
 
-.factory('DOMAIN_URL', function($location, $rootScope) {
-	$rootScope.domain = window.domainUrl;
-	console.log($location.absUrl());
-  	return window.domainUrl;
-})
-
-.factory('AuthService', function($resource, DOMAIN_URL) {
-  var currentUser = $resource(DOMAIN_URL + 'me/', null, {});
-  return currentUser;
-})
-
-.factory('ArticlesService', function($resource, DOMAIN_URL) {
-  var articlesSrvc = $resource(DOMAIN_URL + 'articles/:id/', null, {
-  	'get':  {method:'GET', isArray:true},
-  	'update':  {method:'PUT'}
-  });
-  return articlesSrvc;
-})
-
-.factory('NotesService', function($resource, DOMAIN_URL) {
-  var notesSrvc = $resource(DOMAIN_URL + 'notes/:id/', null, {
-  	'update':  {method:'PUT'}
-  });
-  return notesSrvc;
-})
-
-.controller('EditorController', function($scope, $http, DOMAIN_URL, CHEATSHEET) {
+angular.module('controllers.editor', [
+	'config',
+	'services.domain'
+])
+.controller('EditorController', ["$scope", "$http", "DOMAIN_URL", "CHEATSHEET", function($scope, $http, DOMAIN_URL, CHEATSHEET) {
 	$scope.textAreaModel = '[Paste here your Original HTML code....]';
 	$scope.showDownloadLink = false;
 
@@ -252,9 +195,18 @@ var angularRoutingApp = angular.module('controllers', [
 		$(this).parent().find('.revenue').toggle();
 	});
 
-})
+}])
+/**
+ * Controller module for the header
+ * @module controllers/header
+ */
 
-.controller('HeaderController', function($scope, $rootScope, $location, AuthService, ArticlesService) {
+angular.module('controllers.header', [
+	'config',
+	'services.auth',
+	'services.article'
+])
+.controller('HeaderController', ["$scope", "$rootScope", "$location", "AuthService", "ArticlesService", function($scope, $rootScope, $location, AuthService, ArticlesService) {
 	$scope.message = 'Who we are';
 	$rootScope.user = AuthService.get();
 	$rootScope.alert = {
@@ -332,13 +284,19 @@ var angularRoutingApp = angular.module('controllers', [
 		$('#navbar').toggle();
 		$('#toggleDown').toggle();
 	}
-})
+}])
 
-.controller('AboutController', function($scope) {
-	$scope.message = 'Who we are';
-})
+/**
+ * Controller module for the content
+ * @module controllers/content
+ */
 
-.controller('WorknotesController', function($scope, $rootScope, ngTableParams, NotesService) {
+angular.module('controllers.worknotes', [
+	'config',
+	'ngTable',
+	'services.notes'
+])
+.controller('WorknotesController', ["$scope", "$rootScope", "ngTableParams", "NotesService", function($scope, $rootScope, ngTableParams, NotesService) {
 	$scope.message = 'Who we are';
 
     NotesService.get(function(arg){
@@ -383,4 +341,117 @@ var angularRoutingApp = angular.module('controllers', [
 			$scope.tableParams.data.splice(row, 1);
     	});
     }
-});
+}]);
+// Creación del módulo
+var angularRoutingApp = angular.module('angularRoutingApp', [
+	'config',
+	'controllers.about',
+	'controllers.header',
+	'controllers.editor',
+	'controllers.worknotes',
+	'feeds',
+	'ui.router'
+])
+// Configuración de las rutas
+angularRoutingApp.config(["$stateProvider", function($stateProvider) {
+	// Now set up the states
+	$stateProvider
+		.state('index', {
+			url: "",
+			views: {
+				"header": {
+					controller: 'HeaderController',
+					templateUrl: 'header.html'
+				},
+				"content": {
+					controller: 'EditorController',
+					templateUrl: 'editor.html'
+				}
+			}
+		})
+		.state('worknotes', {
+			url: "/worknotes",
+			views: {
+				"header": {
+					controller: 'HeaderController',
+					templateUrl: 'header.html'
+				},
+				"content": {
+					controller: 'WorknotesController',
+					templateUrl: 'worknotes.html'
+				}
+			}
+		})
+		.state('about', {
+			url: "/about",
+			views: {
+				"header": {
+					controller: 'HeaderController',
+					templateUrl: 'header.html'
+				},
+				"content": {
+					controller: 'AboutController',
+					templateUrl: 'about.html'
+				}
+			}
+		})
+}]);
+
+/**
+ * Service module for the article
+ * @module services/article
+ */
+
+angular.module('services.article', [
+	'config',
+	'ngResource'
+])
+.factory('ArticlesService', ["$resource", "DOMAIN_URL", function($resource, DOMAIN_URL) {
+  var articlesSrvc = $resource(DOMAIN_URL + 'articles/:id/', null, {
+  	'get':  {method:'GET', isArray:true},
+  	'update':  {method:'PUT'}
+  });
+  return articlesSrvc;
+}])
+/**
+ * Service module for the auth
+ * @module services/auth
+ */
+
+angular.module('services.auth', [
+	'config',
+	'ngResource'
+])
+.factory('AuthService', ["$resource", "DOMAIN_URL", function($resource, DOMAIN_URL) {
+  var currentUser = $resource(DOMAIN_URL + 'me/', null, {});
+  return currentUser;
+}]);
+/**
+ * Service module for the domain
+ * @module services/domain
+ */
+
+angular.module('services.domain', [
+	'config',
+	'ngResource'
+])
+.factory('DOMAIN_URL', ["$location", "$rootScope", function($location, $rootScope) {
+	$rootScope.domain = window.domainUrl;
+	console.log($location.absUrl());
+  	return window.domainUrl;
+}])
+/**
+ * Service module for the domain
+ * @module services/domain
+ */
+
+angular.module('services.notes', [
+	'config',
+	'ngResource'
+])
+.factory('NotesService', ["$resource", "DOMAIN_URL", function($resource, DOMAIN_URL) {
+  var notesSrvc = $resource(DOMAIN_URL + 'notes/:id/', null, {
+  	'update':  {method:'PUT'}
+  });
+  return notesSrvc;
+}])

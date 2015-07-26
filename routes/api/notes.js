@@ -34,6 +34,28 @@ module.exports = function(app, config, db, query) {
         res.send(200, {status:"Ok", object: newNote});
     });
 
+    app.put('/notes/:id', function(req, res) {
+        console.log('new note');
+        console.log(req.body);
+
+        query.getNoteById(req.params.id, function (note) {
+
+            note.hours = req.body.hours;
+            note.work = req.body.work;
+            note.mistakes = req.body.mistakes;
+            note.suggestions = req.body.suggestions;
+            note.clarifications = req.body.clarifications;
+            note.comments = req.body.comments;
+
+            note.author = req.user;
+            note.articleId = req.body.articleId;
+
+            note.save();
+
+            res.send(200, {status:"Ok", object: note});
+        });
+    });
+
     app.delete('/notes/:id', function(req, res) {
         console.log('notes delete');
 

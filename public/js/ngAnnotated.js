@@ -315,7 +315,7 @@ angular.module('controllers.worknotes', [
     });
 
     $scope.newRow = function() {
-    	$scope.tableParams.data.push({
+    	var objectEmpty = {
 	    	date: new Date(),
 	    	hours: 0,
 	    	work: 'empty',
@@ -323,13 +323,17 @@ angular.module('controllers.worknotes', [
 	    	suggestions: 'empty',
 	    	clarifications: 'empty',
 	    	comments: 'empty'
-    	})
+    	};
+    	NotesService.save(objectEmpty, function(arg){
+    		objectEmpty.id = arg.object._id;
+    		$scope.tableParams.data.push(objectEmpty);
+    	});
     }
 
     $scope.saveTable = function(row) {
     	var objectToSend = $scope.tableParams.data[row];
     	objectToSend.articleId = $rootScope.article._id;
-    	NotesService.save(objectToSend, function(arg){
+    	NotesService.update({id: objectToSend.id}, objectToSend, function(arg){
     		$scope.tableParams.data[row] = arg.object;
     	});
     }

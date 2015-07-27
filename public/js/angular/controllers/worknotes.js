@@ -19,8 +19,8 @@ angular.module('controllers.worknotes', [
 	        total: 1,
 	        count: 10           // count per page
 	    }, {
-	        // total: data.length, // length of data
-	        counts: [],   // hides pagination
+	        total: $scope.data.length, // length of data
+	        // counts: [],   // hides pagination
 	        getData: function($defer, params) {
 	            $defer.resolve($scope.data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
 	        }

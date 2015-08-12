@@ -22,12 +22,12 @@ This app use multiple github projects:
 - Using bootstrap-stopwatch (https://github.com/sollenne/bootstrap-stopwatch)
 
 ## Mongo quicksheet
-show dbs
-use dbs_name
-db.dropDatabase();
-show collections
-db.collection_name.find().pretty()
-db.collection_name.drop()
+- show dbs
+- use dbs_name
+- db.dropDatabase();
+- show collections
+- db.collection_name.find().pretty()
+- db.collection_name.drop()
 
 ## Contribute
 

@@ -21,6 +21,14 @@ This app use multiple github projects:
 - Using Teacher as spellChecker (https://github.com/vesln/teacher)
 - Using bootstrap-stopwatch (https://github.com/sollenne/bootstrap-stopwatch)
 
+## Mongo quicksheet
+show dbs
+use dbs_name
+db.dropDatabase();
+show collections
+db.collection_name.find().pretty()
+db.collection_name.drop()
+
 ## Contribute
 
 Feel free to make changes and issue a pull request.

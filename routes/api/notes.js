@@ -40,7 +40,8 @@ module.exports = function(app, config, db, query) {
 
         query.getNoteById(req.params.id, function (note) {
 
-            note.hours = req.body.hours;
+            note.date = new Date(req.body.date);
+	    note.hours = req.body.hours;
             note.work = req.body.work;
             note.mistakes = req.body.mistakes;
             note.suggestions = req.body.suggestions;

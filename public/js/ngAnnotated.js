@@ -318,10 +318,9 @@ angular.module('controllers.worknotes', [
     	$scope.data = arg.data;
 	    $scope.tableParams = new ngTableParams({
 	        page: 1,            // show first page
-	        total: 1,
-	        count: 10           // count per page
+	        count: 20           // count per page
 	    }, {
-	        // total: data.length, // length of data
+	        total: $scope.data.length, // length of data
 	        counts: [],   // hides pagination
 	        getData: function($defer, params) {
 	            $defer.resolve($scope.data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
@@ -331,7 +330,7 @@ angular.module('controllers.worknotes', [
 
     $scope.newRow = function() {
     	var objectEmpty = {
-	    	date: new Date(),
+	    	date: moment().format('d/MM/YYYY hh:mm'),
 	    	hours: 0,
 	    	work: 'empty',
 	    	mistakes: 'empty',
@@ -362,6 +361,7 @@ angular.module('controllers.worknotes', [
     	});
     }
 }]);
+
 // Creación del módulo
 var angularRoutingApp = angular.module('angularRoutingApp', [
 	'config',

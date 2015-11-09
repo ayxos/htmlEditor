@@ -1,6 +1,6 @@
 var config = {
     domain: {
-        url: '', // /htmlEditor
+        url: '/htmlEditor/', // /htmlEditor
         host: 'http://localhost', // http://ayxos.com/htmlEditor
         port: '8007' // null
     },

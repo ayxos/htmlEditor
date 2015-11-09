@@ -16,7 +16,7 @@
   </thead>
   <tbody>
     <tr ng-repeat="row in $data">
-      <td data-title="'Date'"><span ng-if="!row.$edit" ng-bind="row.date | amDateFormat: &quot;dd, MM YYYY, hh:mm&quot;"></span>
+      <td data-title="'Date'"><span ng-if="!row.$edit" ng-bind="row.date | amDateFormat: &quot;d/MM/YYYY hh:mm&quot;"></span>
         <div ng-if="row.$edit">
           <input type="date" ng-model="row.date" class="form-control"/>
         </div>

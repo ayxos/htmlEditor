@@ -3,7 +3,7 @@ var bcrypt      = require('bcrypt-nodejs'),
     config      = require('../config');
 var Schema      = mongoose.Schema;
 
-mongoose.connect('mongodb://' + config.mongodb.credentials + config.mongodb.host + config.mongodb.port + '/' + config.mongodb.dbName, function(err) {
+mongoose.connect(process.env.MONGODDBB_URI, function(err) {
     if (err) throw err;
 });
 

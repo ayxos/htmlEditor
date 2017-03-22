@@ -13,7 +13,7 @@ var app             = express();
 var query           = require('./routes/mongodb/functions')(app, db),
     config          = require('./routes/config');
 
-var port            = config.domain.port;
+var port            = process.env.PORT || config.domain.port;
 
 var morgan          = require('morgan')
   , cookieParser    = require('cookie-parser')

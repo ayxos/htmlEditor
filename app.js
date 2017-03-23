@@ -7,8 +7,7 @@ var express         = require('express'),
     favicon         = require('serve-favicon');
 
 var app             = express();
-    server          = require('http').createServer(app),
-    io              = require('socket.io').listen(server);
+    server          = require('http').createServer(app);
 
 var query           = require('./routes/mongodb/functions')(app, db),
     config          = require('./routes/config');

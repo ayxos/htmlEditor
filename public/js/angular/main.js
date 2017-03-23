@@ -5,7 +5,6 @@ var angularRoutingApp = angular.module('angularRoutingApp', [
 	'controllers.header',
 	'controllers.editor',
 	'controllers.worknotes',
-	'feeds',
 	'ui.router'
 ])
 // Configuración de las rutas

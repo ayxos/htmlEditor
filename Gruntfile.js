@@ -41,9 +41,6 @@ module.exports = function(grunt) {
 
   });
 
-  //production task
-  grunt.registerTask('production', ['clean','jade', 'concat', 'uglify']);
-
   //default task
   grunt.registerTask('default', ['clean','jade', 'ngAnnotate']);
 

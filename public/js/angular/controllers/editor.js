@@ -5,13 +5,16 @@
 
 angular.module('controllers.editor', [
 	'config',
-	'services.domain'
+	'services.domain',
+	'textAngular'
 ])
 .controller('EditorController', function($scope, $http, DOMAIN_URL, CHEATSHEET) {
 	$scope.textAreaModel = '[Paste here your Original HTML code....]';
 	$scope.showDownloadLink = false;
 
 	$scope.cheatsheet = CHEATSHEET;
+
+	$scope.htmlVariable;
 
 	var $htmlText = $('.CodeMirror-code').text();
 

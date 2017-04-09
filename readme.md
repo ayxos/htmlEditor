@@ -1,5 +1,5 @@
 # Live Demo
-http://ayxos.com/htmlEditor/
+https://html-multieditor.herokuapp.com/
 
 # Html Editor
 For HTML translators. Its a responsive jquery-angular-node editor tool with instant preview by translators for translators
@@ -9,6 +9,7 @@ For HTML translators. Its a responsive jquery-angular-node editor tool with inst
 ![Screenshot](http://i61.tinypic.com/2z6e8v6.png)
 
 ## Features
+- TextAngular WYSIWYG Editor
 - Edit a HTML file in real-time
 - Translate text using 5 different spell checkers (Spanish, Deutch, English, French and Portuguese)
 - Save your changes
@@ -20,14 +21,6 @@ This app use multiple github projects:
 - Based on Ghost-Markdown-Editor (https://github.com/timsayshey/Ghost-Markdown-Editor)
 - Using Teacher as spellChecker (https://github.com/vesln/teacher)
 - Using bootstrap-stopwatch (https://github.com/sollenne/bootstrap-stopwatch)
-
-## Mongo quicksheet
-- show dbs
-- use dbs_name
-- db.dropDatabase();
-- show collections
-- db.collection_name.find().pretty()
-- db.collection_name.drop()
 
 ## Contribute
 

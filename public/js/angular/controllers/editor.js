@@ -8,12 +8,10 @@ angular.module('controllers.editor', [
 	'services.domain',
 	'textAngular'
 ])
-.controller('EditorController', function($scope, $http, DOMAIN_URL, CHEATSHEET) {
+.controller('EditorController', function($rootScope, $scope, $http, DOMAIN_URL, CHEATSHEET) {
 	$scope.textAreaModel = '[Paste here your Original HTML code....]';
 	$scope.showDownloadLink = false;
-
 	$scope.cheatsheet = CHEATSHEET;
-
 	$scope.htmlVariable;
 
 	var $htmlText = $('.CodeMirror-code').text();
@@ -42,7 +40,6 @@ angular.module('controllers.editor', [
 		  });
     };
     $scope.turnoff = function() {
-    	console.log('lala');
     	$scope.showDownloadLink = false;
     }
 
@@ -99,6 +96,10 @@ angular.module('controllers.editor', [
         console.log(finalResult);
 		$scope.finalHours = finalResult;
 	});
+
+	$('.intro').on('click', function(){
+    	$("#tp").toggle();
+	})
 
 	$('#toggleRevenue').on('click', function(){
 		$(this).parent().find('.revenue').toggle();

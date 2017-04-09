@@ -107,12 +107,10 @@ angular.module('controllers.editor', [
 	'services.domain',
 	'textAngular'
 ])
-.controller('EditorController', ["$scope", "$http", "DOMAIN_URL", "CHEATSHEET", function($scope, $http, DOMAIN_URL, CHEATSHEET) {
+.controller('EditorController', ["$rootScope", "$scope", "$http", "DOMAIN_URL", "CHEATSHEET", function($rootScope, $scope, $http, DOMAIN_URL, CHEATSHEET) {
 	$scope.textAreaModel = '[Paste here your Original HTML code....]';
 	$scope.showDownloadLink = false;
-
 	$scope.cheatsheet = CHEATSHEET;
-
 	$scope.htmlVariable;
 
 	var $htmlText = $('.CodeMirror-code').text();
@@ -141,7 +139,6 @@ angular.module('controllers.editor', [
 		  });
     };
     $scope.turnoff = function() {
-    	console.log('lala');
     	$scope.showDownloadLink = false;
     }
 
@@ -199,6 +196,10 @@ angular.module('controllers.editor', [
 		$scope.finalHours = finalResult;
 	});
 
+	$('.intro').on('click', function(){
+    	$("#tp").toggle();
+	})
+
 	$('#toggleRevenue').on('click', function(){
 		$(this).parent().find('.revenue').toggle();
 	});
@@ -224,17 +225,16 @@ angular.module('controllers.header', [
 	$rootScope.articleNumber = 0;
 	if($rootScope.user) ArticlesService.get(function(arg){
 		$scope.articles = arg;
-
 		//load first by default if exist
 		if($scope.articles.length) $scope.load($scope.articleNumber);
 	});
-
 	// OPS
 	$scope.load = function(index) {
 		var content = $scope.articles[index];
 		$rootScope.articleNumber = index;
 		console.log('loading content...', content);
 		$('#originalText').val(content.content);
+		$('div[ng-model="html"]').html(content.wysiwyg);
 		// insert into editor mode
 		$rootScope.article = content;
 		console.log($location);
@@ -252,7 +252,8 @@ angular.module('controllers.header', [
 		var auxObj = {
 			title: $scope.title,
 			content: $('#originalText').val(),
-			markdown: window.html
+			markdown: window.html,
+			wysiwyg: $('input[type="hidden"]').val()
 		};
 		var article = new ArticlesService(auxObj);
 		article.$save(function(arg) {

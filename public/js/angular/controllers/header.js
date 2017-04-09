@@ -18,17 +18,16 @@ angular.module('controllers.header', [
 	$rootScope.articleNumber = 0;
 	if($rootScope.user) ArticlesService.get(function(arg){
 		$scope.articles = arg;
-
 		//load first by default if exist
 		if($scope.articles.length) $scope.load($scope.articleNumber);
 	});
-
 	// OPS
 	$scope.load = function(index) {
 		var content = $scope.articles[index];
 		$rootScope.articleNumber = index;
 		console.log('loading content...', content);
 		$('#originalText').val(content.content);
+		$('div[ng-model="html"]').html(content.wysiwyg);
 		// insert into editor mode
 		$rootScope.article = content;
 		console.log($location);
@@ -46,7 +45,8 @@ angular.module('controllers.header', [
 		var auxObj = {
 			title: $scope.title,
 			content: $('#originalText').val(),
-			markdown: window.html
+			markdown: window.html,
+			wysiwyg: $('input[type="hidden"]').val()
 		};
 		var article = new ArticlesService(auxObj);
 		article.$save(function(arg) {

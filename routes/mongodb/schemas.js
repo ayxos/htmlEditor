@@ -45,6 +45,7 @@ var articleSchema = mongoose.Schema({
     title: String,
     content: String,
     markdown: String,
+    wysiwyg: String,
     author: { type : Schema.ObjectId, ref : 'user' }
 });
 

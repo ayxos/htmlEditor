@@ -57,7 +57,6 @@ module.exports = function(app, config, db, passport) {
         passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     },
     function(req, email, password, done) {
-        console.log('req',req);
         if (email)
             email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
 
@@ -66,7 +65,6 @@ module.exports = function(app, config, db, passport) {
             // if the user is not already logged in:
             if (!req.user) {
                 db.User.findOne({ email :  email }, function(err, user) {
-                    console.warn('KEKEKE');
                     // if there are any errors, return the error
                     if (err)
                         return done(err);
@@ -90,7 +88,6 @@ module.exports = function(app, config, db, passport) {
                         newUser.password = newUser.generateHash(password);
                         newUser.image = 'lala.jpg';
                         newUser.provider = 'local';
-                        io.sockets.emit('users::create', newUser);
 
                         newUser.save(function(err) {
                             if (err)

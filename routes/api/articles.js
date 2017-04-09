@@ -31,12 +31,8 @@ module.exports = function(app, config, db, query) {
         newArticle.author = req.user;
         newArticle.content = req.body.content;
         newArticle.markdown = req.body.markdown;
-
+        newArticle.wysiwyg = req.body.wysiwyg;
         newArticle.save();
-
-        io.sockets.emit('articles::create', newArticle);
-        io.sockets.emit('notifications', '<div class="bck b_green_light text color c_green padding_small"><div>' + newArticle.title + '</div> created by <strong>' + req.user.username + '</strong></div>');
-
         res.send(200, {status:"Ok", id: req.body._id});
     });
 
@@ -52,12 +48,8 @@ module.exports = function(app, config, db, query) {
         query.getPostById(id, function (article) {
             article.content = req.body.content;
             article.markdown = req.body.markdown;
-
+            newArticle.wysiwyg = req.body.wysiwyg;
             article.save();
-
-            io.sockets.emit('articles::update', article);
-            io.sockets.emit('notifications', '<div class="bck b_green_light text color c_green padding_small"><div>' + article.title + '</div> <strong>updated</strong></div>');
-
             res.send(200, {status:"Ok"});
         });
     });
@@ -70,12 +62,7 @@ module.exports = function(app, config, db, query) {
         var id = req.params.id;
 
         query.getPostById(id, function (article) {
-            io.sockets.emit('notifications', '<div class="bck b_red_light text color c_red padding_small"><div>' + article.title + '</div> <strong>removed</strong></div>');
-
             article.remove();
-
-            io.sockets.emit('articles::remove', id);
-
             res.send(200, {status:"Ok"});
         });
     });

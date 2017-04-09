@@ -37,10 +37,6 @@ module.exports = function(app, config, db, query) {
         newUser.content = req.body.content;
 
         newUser.save();
-
-        io.sockets.emit('users::create', newUser);
-        io.sockets.emit('notifications', '<div class="bck b_green_light text color c_green bold">user created</div>');
-
         res.send(200, {status:"Ok", id: req.body._id});
     });
 
@@ -56,10 +52,6 @@ module.exports = function(app, config, db, query) {
             user.email = req.body.email;
 
             user.save();
-
-            io.sockets.emit('users::update', user);
-            io.sockets.emit('notifications', '<div class="bck b_green_light text color c_green bold">user updated</div>');
-
             res.send(200, {status:"Ok"});
         });
     });
@@ -73,12 +65,7 @@ module.exports = function(app, config, db, query) {
 
         query.getUserById(id, function (user) {
             console.log('userToDelete', user);
-            io.sockets.emit('notifications', '<div class="bck b_red_light text color c_red padding_small"><div>' + user.username + '</div> <strong>removed</strong></div>');
-
             user.remove();
-
-            io.sockets.emit('users::remove', id);
-
             res.send(200, {status:"Ok"});
         });
     });

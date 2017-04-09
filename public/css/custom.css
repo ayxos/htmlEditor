@@ -58,3 +58,14 @@ htmlEditor {
 .note {
 	margin: 100px;
 }
+
+button[name="html"], button[name="html"].btn-default[disabled] {
+	background: yellow;
+}
+
+.intro {
+    margin: 1% 10% 2%;
+    padding: 1%;
+	background-color: #ffffcc;
+    border-left: 6px solid #ffeb3b;
+}

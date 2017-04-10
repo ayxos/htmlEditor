@@ -145,7 +145,7 @@ module.exports = function(app, config, db, passport) {
 
         // process the login form
         app.post('/login', passport.authenticate('local-login', {
-            successRedirect : config.domain.host + config.domain.port + config.public.url.admin, // redirect to the secure profile section
+            successRedirect : '/', // redirect to the secure profile section
             failureRedirect : '/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
@@ -161,7 +161,7 @@ module.exports = function(app, config, db, passport) {
 
         // process the signup form
         app.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : config.domain.host + config.domain.port + config.public.url.admin, // redirect to the secure profile section
+            successRedirect : config.domain.host, // redirect to the secure profile section
             failureRedirect : '/signup', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
@@ -178,7 +178,7 @@ module.exports = function(app, config, db, passport) {
             });
         });
         app.post('/connect/local', passport.authenticate('local-signup', {
-            successRedirect : config.domain.host + config.domain.port + config.public.url.admin, // redirect to the secure profile section
+            successRedirect : config.domain.host, // redirect to the secure profile section
             failureRedirect : '/connect/local', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));

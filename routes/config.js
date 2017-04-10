@@ -1,7 +1,7 @@
 var config = {
     domain: {
         url: '', // /htmlEditor
-        host: 'http://localhost', // http://ayxos.com/htmlEditor
+        host: '/', // http://ayxos.com/htmlEditor
         port: '8007' // null
     },
     env: 'dev', // dev or prod

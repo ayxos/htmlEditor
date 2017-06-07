@@ -1,4 +1,6 @@
 # Live Demo
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/ayxos/htmlEditor.svg)](https://greenkeeper.io/)
 https://html-multieditor.herokuapp.com/
 
 # Html Editor
